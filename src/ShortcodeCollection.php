@@ -2,9 +2,12 @@
 
 namespace Palmtree\WordPress\Shortcode;
 
-use Palmtree\Collection\Collection;
+use Palmtree\Collection\Map;
 
-class ShortcodeCollection extends Collection
+/**
+ * @method ShortcodeInterface get(string $key)
+ */
+class ShortcodeCollection extends Map
 {
     protected $prefix = '';
 

@@ -9,8 +9,6 @@ abstract class AbstractShortcode implements ShortcodeInterface
     /** @var array */
     protected $defaults = [];
 
-    abstract public function getOutput(array $atts): string;
-
     public function getDefaults(): array
     {
         return $this->defaults;

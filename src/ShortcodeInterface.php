@@ -6,5 +6,6 @@ interface ShortcodeInterface
 {
     public function getKey(): string;
 
-    public function getOutput(array $atts): string;
+    /** @param array|string $atts */
+    public function getOutput($atts): string;
 }

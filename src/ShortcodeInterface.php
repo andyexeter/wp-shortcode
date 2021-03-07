@@ -1,18 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Palmtree\WordPress\Shortcode;
 
 interface ShortcodeInterface
 {
-    /**
-     * @return string
-     */
-    public function getKey();
+    public function getKey(): string;
 
-    /**
-     * @param array $atts
-     *
-     * @return mixed
-     */
-    public function getOutput($atts);
+    public function getOutput(array $atts): string;
 }

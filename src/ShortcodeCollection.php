@@ -1,46 +1,55 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Palmtree\WordPress\Shortcode;
 
 use Palmtree\Collection\Map;
 
-/**
- * @method ShortcodeInterface get(string $key)
- */
-class ShortcodeCollection extends Map
+class ShortcodeCollection
 {
-    protected $prefix = '';
+    /** @var Map<string, ShortcodeInterface> */
+    private $map;
+    /** @var string */
+    private $prefix = '';
 
-    public function __construct($items = [])
+    public function __construct(array $items = [])
     {
         add_action('init', function () {
             $this->registerShortcodes();
         });
 
-        parent::__construct(ShortcodeInterface::class);
+        $this->map = new Map(ShortcodeInterface::class);
 
-        $this->add($items);
+        $this->map->add($items);
     }
 
-    public function setPrefix($prefix)
+    public function set(string $key, ShortcodeInterface $shortcode): self
+    {
+        $this->map->set($key, $shortcode);
+
+        return $this;
+    }
+
+    public function get(string $key): ShortcodeInterface
+    {
+        return $this->map->get($key);
+    }
+
+    public function setPrefix(string $prefix): self
     {
         $this->prefix = $prefix;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPrefix()
+    public function getPrefix(): string
     {
         return $this->prefix;
     }
 
-    protected function registerShortcodes()
+    private function registerShortcodes(): void
     {
-        foreach ($this->all() as $shortcode) {
-            /** @var ShortcodeInterface $shortcode */
+        foreach ($this->map as $shortcode) {
+            /* @var ShortcodeInterface $shortcode */
             add_shortcode($this->getPrefix() . $shortcode->getKey(), [$shortcode, 'getOutput']);
         }
     }

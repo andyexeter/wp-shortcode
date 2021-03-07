@@ -1,9 +1,9 @@
 # Palmtree WordPress Shortcode
 
-WordPress shortcode component for Palmtree PHP.
+WordPress shortcode helper
 
 ## Requirements
-* PHP >= 5.6
+* PHP >= 7.1
 
 ## Installation
 
